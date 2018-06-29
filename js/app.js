@@ -1,19 +1,18 @@
 // Enemies our player must avoid
-class Enemy {
-  constructor(){
-    this.sprite = 'images/enemy-bug.png';
-    this.x = 100;
-    this.y = 90;
-  }
+let Enemy = function() {
+   this.sprite = 'images/enemy-bug.png';
+   this.x = 15;
+   this.y = 20;
+ };
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
-    render() {
-      ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-    }
-};
+//     render() {
+//       ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+//     }
+// };
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
@@ -41,16 +40,17 @@ render() {
 };
 // This class requires an update(), render() and
 // a handleInput() method.
-// Player.prototype.update = function(dt) {
-// }
+Player.prototype.update = function(dt) {
+}
 
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-let allEnemies = [];
+let allEnemies = [new Enemy()];
 let player = new Player();
+
 
 
 // This listens for key presses and sends the keys to your
@@ -65,3 +65,6 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+
+// add star or shield so when hit: if hasShield = true, removeShield keep going - else backToStart
