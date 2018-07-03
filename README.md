@@ -7,4 +7,4 @@ For detailed instructions on how to get started, check out this [guide](https://
 
 My References
 In order to complete this project, I referenced these sources:
-http://www.objectplayground.com/
+http://www.objectplayground.com/, MDN(https://developer.mozilla.org/en-US/), W3Schools(https://www.w3schools.com/),

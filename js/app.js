@@ -17,6 +17,11 @@ let Enemy = function() {
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
+  this.x = this.x + (50 * dt);
+  if (this.x > 500){
+    this.x = 0;
+  }
+  // if the canvas = 500, move enemy back to 0 position
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
@@ -34,12 +39,23 @@ class Player {
   this.x = 200;
   this.y = 400;
 }
+handleInput(keypress) {
+  // if (keypress ==  'left') {
+  //   this.x = this.x - 50;
+  // }
+  if (keypress == 'up') {
+    this.y = this.y - 100;
+  }
+
+}
 render() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 };
 // This class requires an update(), render() and
 // a handleInput() method.
+// switch statement also possible here
+
 Player.prototype.update = function(dt) {
 }
 
@@ -50,6 +66,13 @@ Player.prototype.update = function(dt) {
 
 let allEnemies = [new Enemy()];
 let player = new Player();
+
+// TODO: WHY won't this work??
+// function newEnemy() {
+//   if (allEnemies <= 2) {
+//     allEnemies.push(new Enemy);
+//   }
+// }
 
 
 
