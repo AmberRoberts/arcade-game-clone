@@ -59,6 +59,9 @@ render() {
 Player.prototype.update = function(dt) {
 }
 
+collision(enemy, player) {
+
+}
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
