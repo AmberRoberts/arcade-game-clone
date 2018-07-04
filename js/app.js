@@ -40,13 +40,27 @@ class Player {
   this.y = 400;
 }
 handleInput(keypress) {
-  // if (keypress ==  'left') {
-  //   this.x = this.x - 50;
-  // }
-  if (keypress == 'up') {
+  if (keypress ==  'left') {
+    this.x = this.x - 50;
+      if (this.x < 0){
+        this.x = 0;
+      }
+  } else if (keypress == 'up') {
     this.y = this.y - 100;
   }
-
+      if (this.y > 350) {
+        this.y = 350;
+      }
+  if (keypress == 'right') {
+    this.x = this.x + 50;
+  }
+    if (this.x > 410){
+      this.x = 410;
+    }
+  if (keypress == 'down') {
+    this.y = this.y + 100;
+  }
+  // add size stipulation via bugs
 }
 render() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
@@ -59,9 +73,9 @@ render() {
 Player.prototype.update = function(dt) {
 }
 
-collision(enemy, player) {
-
-}
+// collision(enemy, player) {
+//
+// }
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -94,3 +108,7 @@ document.addEventListener('keyup', function(e) {
 
 
 // add star or shield so when hit: if hasShield = true, removeShield keep going - else backToStart
+
+// if (this.y = -50) {
+//   winner();
+// }
