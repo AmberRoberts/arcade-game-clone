@@ -5,6 +5,16 @@ Students should use this [rubric](https://review.udacity.com/#!/projects/2696458
 
 For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
 
+Instructions to Play
+
+To play this game, you may clone the GitHub repository to play locally, or view the GitHub page at: https://amberroberts.github.io/arcade-game-clone/
+
+Use your arrow keys to move your Hero across the game board—but watch out! If you run into a nasty little bug, you'll get bumped back to start. When you reach the River of Success, you WIN!
+
+There are tricky little beasts scattered throughout your path, but we have faith that with your persistence and bravery, you will prevail.
+
+Go forth, Hero, and tread carefully as you complete your journey to the water.
+
 My References
 In order to complete this project, I referenced these sources:
-http://www.objectplayground.com/, MDN(https://developer.mozilla.org/en-US/), W3Schools(https://www.w3schools.com/),
+http://www.objectplayground.com/, MDN(https://developer.mozilla.org/en-US/), W3Schools(https://www.w3schools.com/), https://matthewcranford.com/arcade-game-walkthrough-part-1-starter-code-breakdown/, video chat with Udacity staff Iip, https://stackoverflow.com, keypress function research https://www.quirksmode.org/js/keys.html and https://dmauro.github.io/Keypress/,
