@@ -2,13 +2,13 @@
   class Entity {
     constructor() {
       this.sprite = 'images/';
-      this.x = 200;
-      this.y = 500;
+      this.x = 2;
+      this.y = 5;
     }
 
     // ***** Draw the Entities on screen *****
     render() {
-      ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+      ctx.drawImage(Resources.get(this.sprite), this.x * 101, this.y * 83);
     }
   }
 
@@ -33,9 +33,9 @@
 
     update(dt) {
       // Enemy speed
-      this.x = this.x + (100 * dt);
+      this.x = this.x + (dt);
       // if the Enemy reaches the end of the canvas, move Enemy back to start to scurry again.
-      if (this.x > 500){
+      if (this.x > 5){
         this.x = 0;
       }
   }
@@ -52,36 +52,37 @@ class Player extends Entity {
   constructor() {
   super(); // super constructor to alter the original class
   this.sprite += 'char-horn-girl.png'; // adds character image
-  this.x = 200;
-  this.y = 400;
+  this.x = 2;
+  this.y = 5;
 }
 
 // ***** keypress input for movement *****
 handleInput(keypress) {
   if (keypress ==  'left') {
-    this.x = this.x - 50;
+    this.x = this.x - 1;
       if (this.x < 0){
         this.x = 0;
       }
+    }
 
   else if (keypress == 'right') {
-    this.x = this.x + 50;
-      if (this.x > 405) {
-        this.x = 405;
+    this.x = this.x + 1;
+      if (this.x > 4) {
+        this.x = 4;
       }
-  }
-  }
-
-  else if (keypress == 'up') {
-    this.y = this.y - 100;
   }
 
   else if (keypress == 'down') {
-    this.y = this.y + 100;
-      if (this.y = 400) {
-        this.y = 400;
+    this.y = this.y + 1;
+      if (this.y > 5) {
+        this.y = 5;
       }
   }
+
+  else if (keypress == 'up') {
+    this.y = this.y - 1;
+  }
+
   // else if (keypress == 'space') {
   //   this.y = this.y - 150;
   // }
