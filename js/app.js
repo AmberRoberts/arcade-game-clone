@@ -28,6 +28,7 @@
       this.x = x;
       this.y = y;
     }
+
     // ***** Update the enemy's position *****
     // Parameter: dt, a time delta between ticks. Movement multiplied by DT to ensure the game runs at the same speed for all computers
 
@@ -36,7 +37,7 @@
       this.x = this.x + (dt);
       // if the Enemy reaches the end of the canvas, move Enemy back to start to scurry again.
       if (this.x > 5){
-        this.x = 0;
+        this.x = -1;
       }
   }
 };
@@ -84,27 +85,77 @@ handleInput(keypress) {
   }
 
   // else if (keypress == 'space') {
-  //   this.y = this.y - 150;
+  //   this.y = this.y - 2;
   // }
 
   // winning();
 }
 update(dt) {
-  // if (this.y == 0){
-  //   // modal();
-  //   console.log('Huzzah! Our Hero has succeeded in its quest!');
-  // }
+  if (this.y == 0){
+    // modal();
+    console.log('Huzzah! One hero has arrived!');
+  }
 }
+};
+
+class PlayerTwo extends Entity {
+  constructor() {
+    super();
+    this.sprite += 'char-boy.png';
+    this.x = 1;
+    this.y = 5;
+  }
+
+  update(dt) {
+      if (this.y == 0){
+        // modal();
+        console.log('Your princess is in another castle');
+      }
+  }
+  handleInput(keypress) {
+    if (keypress ==  'left') {
+      this.x = this.x - 1;
+        if (this.x < 0){
+          this.x = 0;
+        }
+      }
+
+    else if (keypress == 'right') {
+      this.x = this.x + 1;
+        if (this.x > 4) {
+          this.x = 4;
+        }
+    }
+
+    else if (keypress == 'down') {
+      this.y = this.y + 1;
+        if (this.y > 5) {
+          this.y = 5;
+        }
+    }
+
+    else if (keypress == 'up') {
+      this.y = this.y - 1;
+    }
+
+    // else if (keypress == 'space') {
+    //   this.y = this.y - 2;
+    // }
+
+    // winning();
+  }
 };
 
 
 // ***** Winning *****
 
-function winning() {
-if (Player.y <= 0) {
-  console.log('winning');
-}
-}
+// winning happens in update(dt)
+
+// function winning() {
+//   if (Player.y == 0) {
+//     console.log('winning');
+//   }
+// }
 
 
 // ***** Check for collision *****
@@ -119,8 +170,9 @@ if (Player.y <= 0) {
 
 // ***** Instantiate Enemy and Player objects *****
 
-const allEnemies = [...Array(3)].map((_, i) => new Enemy(0,i +1));
+const allEnemies = [...Array(3)].map((_, i) => new Enemy(0, i + 1));
 let player = new Player();
+let player2 = new PlayerTwo();
 
 
 
@@ -137,6 +189,18 @@ document.addEventListener('keyup', function(e) {
     player.handleInput(allowedKeys[e.keyCode]);
 });
 
+// ***** PlayerTwo keycodes *****
+document.addEventListener('keyup', function(e) {
+    var allowedKeys = {
+        65: 'left',
+        87: 'up',
+        68: 'right',
+        83: 'down',
+        // 32: 'space'
+    };
+
+    player2.handleInput(allowedKeys[e.keyCode]);
+});
 
 // // TODO: add star or shield so when hit: if hasShield = true, removeShield keep going - else backToStart, reach the top, get a point, and game resets and speed increases.
 
