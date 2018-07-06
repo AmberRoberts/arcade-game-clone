@@ -2,23 +2,23 @@
   class Entity {
     constructor() {
       this.sprite = 'images/';
-      this.x = 5;
-      this.y = 2;
+      this.x = 200;
+      this.y = 500;
     }
 
     // ***** Draw the Entities on screen *****
     render() {
       ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-  }
+    }
   }
 
   // ***** Check for collision *****
   //
-  function checkCollisions() {
-    if ((Enemy.x === Player.x) && (Enemy.y === Player.y)){
-    console.log('Smoosh!'); // // TODO: why does this keep showing up??
-  }
-  }
+  // function checkCollisions() {
+  //   if ((Enemy.x === Player.x) && (Enemy.y === Player.y)){
+  //   console.log('Smoosh!'); // // TODO: why does this keep repeating??
+  // }
+  // }
 
 // ***** Enemies our player must avoid *****
   class Enemy extends Entity {
@@ -28,16 +28,16 @@
       this.x = x;
       this.y = y;
     }
-  }
-// ***** Update the enemy's position *****
-// Parameter: dt, a time delta between ticks. Movement multiplied by DT to ensure the game runs at the same speed for all computers
+    // ***** Update the enemy's position *****
+    // Parameter: dt, a time delta between ticks. Movement multiplied by DT to ensure the game runs at the same speed for all computers
 
-Enemy.prototype.update = function(dt) {
-  // Enemy speed
-  this.x = this.x + (100 * dt);
-  // if the Enemy reaches the end of the canvas, move Enemy back to start to scurry again.
-  if (this.x > 500){
-    this.x = 0;
+    update(dt) {
+      // Enemy speed
+      this.x = this.x + (100 * dt);
+      // if the Enemy reaches the end of the canvas, move Enemy back to start to scurry again.
+      if (this.x > 500){
+        this.x = 0;
+      }
   }
 };
 
@@ -45,13 +45,13 @@ Enemy.prototype.update = function(dt) {
 
 
 // ***** Create Player class *****
-// This class requires an update(), render() and
+// This class uses an update(), render() and
 // a handleInput() method.
 
 class Player extends Entity {
   constructor() {
-  super();
-  this.sprite += 'char-horn-girl.png';
+  super(); // super constructor to alter the original class
+  this.sprite += 'char-horn-girl.png'; // adds character image
   this.x = 200;
   this.y = 400;
 }
@@ -88,14 +88,14 @@ handleInput(keypress) {
 
   // winning();
 }
+update(dt) {
+  // if (this.y == 0){
+  //   // modal();
+  //   console.log('Huzzah! Our Hero has succeeded in its quest!');
+  // }
+}
 };
 
-Player.prototype.update = function(dt) {
-  if (this.y == 0){
-    // modal();
-    console.log('Huzzah! Our Hero has succeeded in its quest!');
-  }
-}
 
 // ***** Winning *****
 
@@ -118,8 +118,9 @@ if (Player.y <= 0) {
 
 // ***** Instantiate Enemy and Player objects *****
 
-let allEnemies = [...Array(3)].map((_, i) => new Enemy(0, i + 1));
+const allEnemies = [...Array(3)].map((_, i) => new Enemy(0,i +1));
 let player = new Player();
+
 
 
 // This listens for key presses and sends the keys to Player.handleInput() method.
@@ -136,10 +137,9 @@ document.addEventListener('keyup', function(e) {
 });
 
 
-// // TODO: add star or shield so when hit: if hasShield = true, removeShield keep going - else backToStart
+// // TODO: add star or shield so when hit: if hasShield = true, removeShield keep going - else backToStart, reach the top, get a point, and game resets and speed increases.
 
 
-// original code prior to switching to constructors
 
 // ***** Enemies our player must avoid *****
 // let Enemy = function() {
@@ -147,11 +147,3 @@ document.addEventListener('keyup', function(e) {
 //    this.x = 15;
 //    this.y = 20;
 //  };
-
-// Enemy.prototype.render = function() {
-//     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-// };
-
-// render() {
-//   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-// }
