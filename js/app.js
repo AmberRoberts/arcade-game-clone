@@ -10,17 +10,13 @@
     render() {
       ctx.drawImage(Resources.get(this.sprite), this.x * 101, this.y * 83);
     }
-    //
-    // checkCollisions() {
-    //
-    // }
   }
 
-  // ***** Check for collision *****
-  //
+  // TODO: ***** Check for collision *****
+
   // function checkCollisions() {
   //   if ((Enemy.x === Player.x) && (Enemy.y === Player.y)){
-  //   console.log('Smoosh!'); // // TODO: why does this keep repeating??
+  //   console.log('Smoosh!');
   // }
   // }
 
@@ -37,7 +33,7 @@
     // Parameter: dt, a time delta between ticks. Movement multiplied by DT to ensure the game runs at the same speed for all computers
 
     update(dt) {
-      // Enemy speed
+      // ***** Configure enemy speed and reset *****
       // this.x = this.x + (dt);
       // this.x = this.x + (Math.random() + 3) * (dt); // they stick together in a pack but speed up this way... why?
             this.x = this.x + (Math.floor(Math.random() + .033)) + (dt); // this makes them leapfrog -- why?
@@ -48,8 +44,6 @@
       }
   }
 };
-
-// Draw the enemy on the screen, required method for game
 
 
 // ***** Create Player class *****
@@ -68,7 +62,7 @@ class Player extends Entity {
 handleInput(keypress) {
   if (keypress ==  'left') {
     this.x = this.x - 1;
-      if (this.x < 0){
+      if (this.x < 0) {
         this.x = 0;
       }
     }
@@ -90,17 +84,11 @@ handleInput(keypress) {
   else if (keypress == 'up') {
     this.y = this.y - 1;
   }
-
-  // else if (keypress == 'space') {
-  //   this.y = this.y - 2;
-  // }
-
-  // winning();
 }
 update(dt) {
   if (this.y == 0){
-    // modal();
     console.log('Huzzah! One hero has arrived!');
+    // Flash a star and text to save player two?
   }
 }
 };
@@ -115,8 +103,9 @@ class PlayerTwo extends Entity {
 
   update(dt) {
       if (this.y == 0){
-        // modal();
         console.log('Your princess is in another castle');
+        // modal();
+        // reset
       }
   }
   handleInput(keypress) {
@@ -144,46 +133,19 @@ class PlayerTwo extends Entity {
     else if (keypress == 'up') {
       this.y = this.y - 1;
     }
-
-    // else if (keypress == 'space') {
-    //   this.y = this.y - 2;
-    // }
-
-    // winning();
   }
 };
 
-
-// ***** Winning *****
-
-// winning happens in update(dt)
-
-// function winning() {
-//   if (Player.y == 0) {
-//     console.log('winning');
-//   }
-// }
-
-
-// ***** Check for collision *****
-//
-// checkCollisions(Player, Enemy) {
-//   if (Enemy.x == Player.x) {
-//     console.log('Squash!');
-//   } else {
-//     console.log('Move along');
-//   }
-// }
+// ***** Winning currently in update() *****
 
 // ***** Instantiate Enemy and Player objects *****
 
-const allEnemies = [...Array(3)].map((_, i) => new Enemy(-1, i + 1)); // Math.random here to make them appear at different times?
+const allEnemies = [...Array(3)].map((_, i) => new Enemy(-1, i + 1));
 let player = new Player();
-let player2 = new PlayerTwo();
+let player2 = new PlayerTwo(); // add to a function to come in after player 1 gets to top?
 
 
-
-// This listens for key presses and sends the keys to Player.handleInput() method.
+// ***** Sends Player keypresses to Player.handleInput() method. *****
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
         37: 'left',
@@ -203,7 +165,6 @@ document.addEventListener('keyup', function(e) {
         87: 'up',
         68: 'right',
         83: 'down',
-        // 32: 'space'
     };
 
     player2.handleInput(allowedKeys[e.keyCode]);
