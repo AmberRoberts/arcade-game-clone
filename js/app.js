@@ -10,6 +10,10 @@
     render() {
       ctx.drawImage(Resources.get(this.sprite), this.x * 101, this.y * 83);
     }
+    //
+    // checkCollisions() {
+    //
+    // }
   }
 
   // ***** Check for collision *****
@@ -34,9 +38,12 @@
 
     update(dt) {
       // Enemy speed
-      this.x = this.x + (dt);
+      // this.x = this.x + (dt);
+      // this.x = this.x + (Math.random() + 3) * (dt); // they stick together in a pack but speed up this way... why?
+            this.x = this.x + (Math.floor(Math.random() + .033)) + (dt); // this makes them leapfrog -- why?
+
       // if the Enemy reaches the end of the canvas, move Enemy back to start to scurry again.
-      if (this.x > 5){
+      if (this.x > 5) {
         this.x = -1;
       }
   }
@@ -170,7 +177,7 @@ class PlayerTwo extends Entity {
 
 // ***** Instantiate Enemy and Player objects *****
 
-const allEnemies = [...Array(3)].map((_, i) => new Enemy(0, i + 1));
+const allEnemies = [...Array(3)].map((_, i) => new Enemy(-1, i + 1)); // Math.random here to make them appear at different times?
 let player = new Player();
 let player2 = new PlayerTwo();
 
@@ -206,9 +213,9 @@ document.addEventListener('keyup', function(e) {
 
 
 
-// ***** Enemies our player must avoid *****
-// let Enemy = function() {
-//    this.sprite = 'images/enemy-bug.png';
-//    this.x = 15;
-//    this.y = 20;
-//  };
+// ***** Original way I added bugs *****
+// let bug1 = new Enemy(.5, 1);
+// let bug2 = new Enemy(-2, 2);
+// let bug3 = new Enemy(-2.5, 3);
+// let bug4 = new Enemy(-3.75, 1)
+// const allEnemies = [bug1, bug2, bug3, bug4];
