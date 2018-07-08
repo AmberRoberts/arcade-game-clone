@@ -63,7 +63,7 @@ var Engine = (function(global) {
      * game loop.
      */
     function init() {
-        reset();
+        // reset();
         lastTime = Date.now();
         main();
     }
@@ -89,12 +89,19 @@ var Engine = (function(global) {
      * the data/properties related to the object. Do your drawing in your
      * render methods.
      */
+
+   //   // TODO: ***** Check for collision *****
+   //   function checkCollisions() {
+   //           if (Player.y > 3) {
+   //           console.log('smoosh!');
+   //   }
+   // }
+
     function updateEntities(dt) {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
         player.update();
-        player2.update();
     }
 
     /* This function initially draws the "game level", it will then call
@@ -155,16 +162,12 @@ var Engine = (function(global) {
         });
 
         player.render();
-        player2.render();
     }
 
     /* This function does nothing but it could have been a good place to
      * handle game reset states - maybe a new game menu or a game over screen
      * those sorts of things. It's only called once by the init() method.
      */
-    function reset() {
-        // noop
-    }
 
     /* Go ahead and load all of the images we know we're going to need to
      * draw our game level. Then set init as the callback method, so that when

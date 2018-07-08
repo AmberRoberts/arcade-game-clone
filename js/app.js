@@ -1,4 +1,4 @@
-// ***** Create Entity class as referenced in engine.js to add Enemies and Player
+// ***** Create Entity class as referenced in engine.js to add Enemies and Player to gameboard
 class Entity {
   constructor() {
     this.sprite = "images/";
@@ -11,7 +11,6 @@ class Entity {
     ctx.drawImage(Resources.get(this.sprite), this.x * 101, this.y * 83);
   }
 }
-
 
 // ***** Enemies our player must avoid *****
 class Enemy extends Entity {
@@ -28,7 +27,7 @@ class Enemy extends Entity {
 
   update(dt) {
     // ***** Configure enemy speed and reset *****
-    this.x += this.speed * (dt);
+    this.x += this.speed * dt;
 
     if (this.x > 5) {
       this.x = -1;
@@ -52,77 +51,50 @@ class Player extends Entity {
   handleInput(keypress) {
     if (keypress == "left") {
       this.x = this.x - 1;
-        if (this.x < 0) {
-          this.x = 0;
-        }
+      if (this.x < 0) {
+        this.x = 0;
+      }
     } else if (keypress == "right") {
       this.x = this.x + 1;
-        if (this.x > 4) {
-          this.x = 4;
-        }
+      if (this.x > 4) {
+        this.x = 4;
+      }
     } else if (keypress == "down") {
       this.y = this.y + 1;
-        if (this.y > 5) {
-          this.y = 5;
-        }
+      if (this.y > 5) {
+        this.y = 5;
+      }
     } else if (keypress == "up") {
       this.y = this.y - 1;
+    }
+    if (this.y < 0) {
+      this.y = 0;
     }
   }
 
   update(dt) {
-    if (this.y == 0) {
-      console.log("Huzzah! One hero has arrived!");
-      // Flash a star and text to save player two?
+    // ***** Winning *****
+    if (this.y === 0) {
+      console.log("Huzzah! Our hero has arrived!");
+      let modal = document.getElementById("winnerModal");
+      let button = document.getElementById("again");
+
+      // ***** Winner modal *****
+      modal.style.display = "block";
+      button.addEventListener("click", function(e) {
+        modal.style.display = "none";
+        player.x = 2;
+        player.y = 5;
+      });
     }
   }
 }
-
-class PlayerTwo extends Entity {
-  constructor() {
-    super();
-    this.sprite += "char-boy.png";
-    this.x = 1;
-    this.y = 5;
-  }
-
-  update(dt) {
-    if (this.y == 0) {
-      console.log("Your princess is in another castle");
-      // modal();
-      // reset
-    }
-  }
-  handleInput(keypress) {
-    if (keypress == "left") {
-      this.x = this.x - 1;
-        if (this.x < 0) {
-          this.x = 0;
-        }
-    } else if (keypress == "right") {
-      this.x = this.x + 1;
-        if (this.x > 4) {
-          this.x = 4;
-        }
-    } else if (keypress == "down") {
-      this.y = this.y + 1;
-        if (this.y > 5) {
-          this.y = 5;
-        }
-    } else if (keypress == "up") {
-      this.y = this.y - 1;
-    }
-  }
-}
-
-// ***** Winning currently in update() *****
 
 // ***** Instantiate Enemy and Player objects *****
 
 // Create an array of allEnemies with 3 bug entities, for each new Enemy, start them off the screen at x -1
 const allEnemies = [...Array(3)].map((_, i) => new Enemy(-1, i + 1));
 let player = new Player();
-let player2 = new PlayerTwo(); // add to a function to come in after player 1 gets to top?
 
 // ***** Sends Player keypresses to Player.handleInput() method. *****
 document.addEventListener("keyup", function(e) {
@@ -136,24 +108,3 @@ document.addEventListener("keyup", function(e) {
 
   player.handleInput(allowedKeys[e.keyCode]);
 });
-
-// ***** PlayerTwo keycodes *****
-document.addEventListener("keyup", function(e) {
-  var allowedKeys = {
-    65: "left",
-    87: "up",
-    68: "right",
-    83: "down"
-  };
-
-  player2.handleInput(allowedKeys[e.keyCode]);
-});
-
-// // TODO: add star or shield so when hit: if hasShield = true, removeShield keep going - else backToStart, reach the top, get a point, and game resets and speed increases.
-
-// ***** Original way I added bugs *****
-// let bug1 = new Enemy(.5, 1);
-// let bug2 = new Enemy(-2, 2);
-// let bug3 = new Enemy(-2.5, 3);
-// let bug4 = new Enemy(-3.75, 1)
-// const allEnemies = [bug1, bug2, bug3, bug4];
