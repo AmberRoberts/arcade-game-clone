@@ -22,7 +22,6 @@ class Enemy extends Entity {
     this.speed = 3 + Math.random() * 3;
   }
 
-
   // ***** Update the enemy's position *****
   // Parameter: dt, a time delta between ticks. Movement multiplied by DT to ensure the game runs at the same speed for all computers
 
@@ -30,17 +29,36 @@ class Enemy extends Entity {
     // ***** Configure enemy speed and reset *****
     this.x += this.speed * dt;
 
-// ***** Collision Checker *****
-// when enemy (this) is close enough to player's x/y location, move player back to start!
-    if (player.x - this.x <= 0.25 && player.x - this.x > -0.25 && this.y === player.y) {
-       console.log('SMOOSH!!!');
-       player.x = 2;
-       player.y = 5;
-       // console.log(player.x player.y this.x this.y);
-       // player.x = 202;
-       // player.y = 400;
-   }
+    // ***** Collision Checker *****
+    // when enemy (this) is close enough to player's x/y location, move player back to start and remove a life!
+    if (
+      player.x - this.x <= 0.33 &&
+      player.x - this.x > -0.33 &&
+      this.y === player.y
+    ) {
+      console.log("SMOOSH!!!");
+      player.x = 2;
+      player.y = 5;
+      player.lives--;
+      document.querySelector(".lives").textContent = player.lives;
 
+      // ***** Loser modal *****
+      if (player.lives === 0) {
+        let lost = document.getElementById("loserModal");
+        let restart = document.getElementById("restart");
+
+        lost.style.display = "block";
+        restart.addEventListener("click", function(e) {
+          player.x = 2;
+          player.y = 5;
+          player.lives = 5;
+          document.querySelector(".lives").textContent = player.lives;
+          lost.style.display = "none";
+        });
+      }
+    }
+
+    // ***** Reset enemy location after it leaves the screen *****
     if (this.x > 5) {
       this.x = -1;
     }
@@ -57,7 +75,8 @@ class Player extends Entity {
     this.sprite += "char-horn-girl.png"; // adds character image
     this.x = 2;
     this.y = 5;
-    this.lives = 5; // if collides with bug, totalLives -- via textContent in checkCollisions
+    this.lives = 5; // if collides with bug, lose a life
+    this.space = 6; // special spacebar function... use at your own risk!
   }
 
   // ***** keypress input for movement *****
@@ -82,6 +101,9 @@ class Player extends Entity {
     }
     if (this.y < 0) {
       this.y = 0;
+    } else if (this.space >= 1 && keypress == "space") {
+      this.x = 2 + Math.random() * 2;
+      this.space--;
     }
   }
 
@@ -96,10 +118,8 @@ class Player extends Entity {
       modal.style.display = "block";
       button.addEventListener("click", function(e) {
         modal.style.display = "none";
-        player.x = player.x;  // Starts player over in the x location they ended in
+        player.x = player.x; // Starts player over in the x location they ended in
         player.y = 5;
-        // Enemy.speed
-        // document.querySelector(".lives").textContent = totalLives;
       });
     }
   }
