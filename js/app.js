@@ -66,9 +66,6 @@ class Enemy extends Entity {
 }
 
 // ***** Create Player class *****
-// This class uses an update(), render() and
-// a handleInput() method.
-
 class Player extends Entity {
   constructor() {
     super(); // super constructor to alter the original class
