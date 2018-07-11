@@ -90,13 +90,6 @@ var Engine = (function(global) {
      * render methods.
      */
 
-   //   // TODO: ***** Check for collision *****
-   //   function checkCollisions() {
-   //           if (Player.y > 3) {
-   //           console.log('smoosh!');
-   //   }
-   // }
-
     function updateEntities(dt) {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);

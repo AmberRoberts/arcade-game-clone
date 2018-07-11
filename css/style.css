@@ -1,5 +1,9 @@
 body {
     text-align: center;
+    font-family: monospace;
+}
+
+.score {
 }
 
 /* Modal adapted from W3S tutorial at https://www.w3schools.com/howto/howto_css_modals.asp */
